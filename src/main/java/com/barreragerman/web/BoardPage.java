@@ -28,5 +28,13 @@ public class BoardPage extends BasePage {
                 .anyMatch(name -> name.equalsIgnoreCase(boardName));
     }
 
+    public boolean waitUntilBoardIsVisible(String boardName) {
+        return wait.until(driver -> {
+            List<String> boards = getBoardNames();
+            return boards.stream()
+                    .anyMatch(name -> name.equalsIgnoreCase(boardName));
+        });
+    }
+
 
 }
