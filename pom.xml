@@ -70,6 +70,19 @@
       <version>2.24.3</version>
     </dependency>
 
+    <!-- ================= APPIUM JAVA CLIENT ================= -->
+    <dependency>
+      <groupId>io.appium</groupId>
+      <artifactId>java-client</artifactId>
+      <version>9.3.0</version>
+    </dependency>
+
+    <!-- ================= SELENIUM SUPPORT ================= -->
+    <dependency>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>selenium-support</artifactId>
+      <version>4.17.0</version>
+    </dependency>
 
   </dependencies>
 </project>
