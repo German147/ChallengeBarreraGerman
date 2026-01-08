@@ -1,36 +1,63 @@
 package com.barreragerman.web;
 
+import com.barreragerman.ConfigManager;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
-import java.time.Duration;
 
 public class DriverFactory {
 
-    private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
+    private static final ThreadLocal<WebDriver> driver =
+            new ThreadLocal<>();
 
     private DriverFactory() {
-    }
-
-    public static void initDriver() {
-        WebDriverManager.chromedriver().setup();
-        WebDriver webDriver = new ChromeDriver();
-
-        webDriver.manage().window().maximize();
-        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
-
-        driver.set(webDriver);
     }
 
     public static WebDriver getDriver() {
         return driver.get();
     }
 
+    public static void initDriver(String browser) {
+
+        WebDriver webDriver;
+
+        String selectedBrowser =
+                browser != null
+                        ? browser.toLowerCase()
+                        : ConfigManager.get("browser").toLowerCase();
+
+        switch (selectedBrowser) {
+
+            case "firefox":
+                WebDriverManager.firefoxdriver().setup();
+                webDriver = new FirefoxDriver();
+                break;
+
+            case "edge":
+                WebDriverManager.edgedriver().setup();
+                webDriver = new EdgeDriver();
+                break;
+
+            case "chrome":
+            default:
+                WebDriverManager.chromedriver().setup();
+                webDriver = new ChromeDriver();
+                break;
+        }
+
+        webDriver.manage().window().maximize();
+        driver.set(webDriver);
+    }
+
     public static void quitDriver() {
-        if (driver.get() != null) {
-            driver.get().quit();
+        WebDriver webDriver = driver.get();
+        if (webDriver != null) {
+            webDriver.quit();
             driver.remove();
         }
     }
 }
+
