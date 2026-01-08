@@ -37,7 +37,9 @@ This project validates a real end-to-end flow using Trello as the system under t
 - Appium 2 with AndroidDriver.
 - PageFactory and UiScrollable for dynamic scrolling.
 - Validation of board presence inside the mobile app.
-
+---
+## 📊 Jenkins configured with Allure
+![img_1.png](docs/images/img_1.png)
 ---
 
 ## 📊 Allure Report
@@ -53,3 +55,4 @@ Below is an example of the generated Allure report after executing the tests:
 
 ```bash
 mvn clean test "-DsuiteXmlFile=testng.xml"
+
