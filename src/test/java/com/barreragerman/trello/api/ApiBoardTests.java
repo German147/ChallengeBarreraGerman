@@ -5,9 +5,10 @@ import com.barreragerman.API.TrelloService;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class BoardTests {
+public class ApiBoardTests {
 
-    @Test(description = "Create board via API and validate it exists using GET, then delete it")
+    @Test(description = "Create board via API and validate it exists using GET, then delete it",
+            groups = { "api", "integration", "regression" })
     public void shouldCreateAndDeleteBoard() {
 
         // Arrange

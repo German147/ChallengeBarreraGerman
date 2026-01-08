@@ -9,9 +9,10 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 
-public class BoardE2ETest extends BaseTest {
+public class WebBoardE2ETest extends WebBaseTest {
 
-    @Test(description = "Validate board created via API is visible in Web UI")
+    @Test(description = "Validate board created via API is visible in Web UI",
+            groups = { "web", "integration", "regression" })
     public void shouldDisplayBoardCreatedFromApi() {
         Board board = TrelloService.createBoard();
         logger.info("Board created: {}", board.getName());

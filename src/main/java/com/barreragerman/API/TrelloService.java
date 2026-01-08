@@ -7,13 +7,12 @@ import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.testng.Assert;
 
 import static io.restassured.RestAssured.given;
 
-public class TrelloApiClient {
+public class TrelloService {
     private static final Logger logger =
-            LogManager.getLogger(TrelloApiClient.class);
+            LogManager.getLogger(TrelloService.class);
 
     static {
         RestAssured.baseURI = ConfigManager.get("trello.baseUrl");
@@ -77,13 +76,6 @@ public class TrelloApiClient {
         return response.as(Board.class);
     }
 
-    public static void assertBoardName(Board board, String expectedName) {
-        Assert.assertEquals(
-                board.getName(),
-                expectedName,
-                "Board name mismatch"
-        );
-    }
 
     public static void deleteBoard(String boardId) {
 
@@ -111,5 +103,35 @@ public class TrelloApiClient {
         return statusCode == 200;
     }
 
+    public static Board updateBoardName(String boardId, String newName) {
+
+        Response rs =
+                given()
+                        .queryParam("key", ConfigManager.get("trello.key"))
+                        .queryParam("token", ConfigManager.get("trello.token"))
+                        .queryParam("name", newName)
+                        .when()
+                        .put("/1/boards/{id}", boardId)
+                        .then()
+                        .statusCode(200)
+                        .extract()
+                        .response();
+
+        return rs.as(Board.class);
+    }
+
+    public static int getBoardStatusCode(String boardId) {
+        int statusCode =
+                given()
+                        .queryParam("key", ConfigManager.get("trello.key"))
+                        .queryParam("token", ConfigManager.get("trello.token"))
+                        .when()
+                        .get("/1/boards/{id}", boardId)
+                        .then()
+                        .extract()
+                        .statusCode();
+
+        return statusCode;
+    }
 
 }

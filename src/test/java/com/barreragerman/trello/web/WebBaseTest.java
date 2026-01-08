@@ -11,7 +11,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 
 @Listeners({ AllureTestNg.class, TestListener.class })
-public abstract class BaseTest {
+public abstract class WebBaseTest {
 
     protected final Logger logger = LogManager.getLogger(this.getClass());
 
