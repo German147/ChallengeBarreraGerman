@@ -15,7 +15,7 @@ public class BoardsTest extends BaseTest {
     public void shouldDisplayBoardCreatedFromApi() {
         HomePage homePage = new HomePage();
         SignInPage signInPage = new SignInPage();
-        String boardName = "My Board Using Karate";
+        String boardName = "My Board Using Karate3";
         homePage.openHomePage();
         BoardPage boardPage = signInPage.login();
 
