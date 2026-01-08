@@ -1,4 +1,4 @@
-package com.barreragerman.trello;
+package com.barreragerman.trello.web;
 
 
 import com.barreragerman.web.BoardPage;
