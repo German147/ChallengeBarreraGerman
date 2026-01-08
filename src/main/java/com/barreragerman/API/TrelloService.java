@@ -1,6 +1,7 @@
 package com.barreragerman.API;
 
 
+import com.barreragerman.ConfigManager;
 import com.barreragerman.expections.BoardException;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;

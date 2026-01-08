@@ -1,5 +1,6 @@
 package com.barreragerman.web;
 
+import com.barreragerman.ConfigManager;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -7,9 +8,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class SignInPage extends BasePage {
 
+    String realUsername = ConfigManager.get("trello.username");
+    String realPassword = ConfigManager.get("trello.password");
+
     public SignInPage() {
         super();
-
     }
 
     @FindBy(id = "username-uid1")
@@ -23,7 +26,7 @@ public class SignInPage extends BasePage {
 
     public void setUserName() {
         wait.until(ExpectedConditions.visibilityOf(userName))
-                .sendKeys("barreragerman27@gmail.com");
+                .sendKeys(realUsername);
     }
 
     private void clickContinue_LoginBtn() {
@@ -32,7 +35,7 @@ public class SignInPage extends BasePage {
 
     private void setPasswordField() {
         wait.until(ExpectedConditions.visibilityOf(passwordField))
-                .sendKeys("PinApp2026!");
+                .sendKeys(realPassword);
     }
 
     private void clickDismissTwoStepVerificationBtn() {
