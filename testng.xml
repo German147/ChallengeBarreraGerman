@@ -1,0 +1,16 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Automation Suite">
+
+    <listeners>
+        <listener class-name="io.qameta.allure.testng.AllureTestNg"/>
+        <listener class-name="com.barreragerman.listeners.TestListener"/>
+    </listeners>
+
+    <test name="All Tests">
+        <packages>
+            <package name="com.barreragerman.trello"/>
+            <package name="com.barreragerman.trello.mobile"/>
+        </packages>
+    </test>
+
+</suite>
