@@ -6,22 +6,23 @@ import com.barreragerman.web.DriverFactory;
 import io.qameta.allure.testng.AllureTestNg;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Listeners;
+import org.testng.annotations.*;
 
 @Listeners({ AllureTestNg.class, TestListener.class })
 public abstract class WebBaseTest {
 
     protected final Logger logger = LogManager.getLogger(this.getClass());
 
-    @BeforeMethod(alwaysRun = true)
-    public void setUp() {
+    //esta tag es para que se auto-seleccione al ser parallel al venir el llamado de un xml
+    @Parameters("browser")
+    @BeforeClass(alwaysRun = true)
+    public void setUp(@Optional String browser) {
         logger.info("Initializing WebDriver");
-        DriverFactory.initDriver();
+        logger.info(">>> Browser parameter received from TestNG = {}", browser);
+        DriverFactory.initDriver(browser);
     }
 
-    @AfterMethod(alwaysRun = true)
+    @AfterClass(alwaysRun = true)
     public void tearDown() {
         logger.info("Quitting WebDriver");
         DriverFactory.quitDriver();

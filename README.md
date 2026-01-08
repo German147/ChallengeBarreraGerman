@@ -26,7 +26,10 @@ This project validates a real end-to-end flow using Trello as the system under t
 
 ### ✔ API
 - Board creation using Trello public API.
-- Validations on response and mapping using POJOs.
+- Board retrieval and validation using GET.
+- Update board validation.
+- Negative scenarios (invalid ID, non-existing resource).
+- Mapping using POJOs and clean service abstraction.
 
 ### ✔ Web
 - Selenium with Page Object Model.
@@ -52,7 +55,23 @@ Below is an example of the generated Allure report after executing the tests:
 ## ▶️ How to Run
 
 ### Run all tests
+## 🏷️ Test Groups (Tags)
 
+Tests are organized using TestNG groups:
+
+- `api` – API tests
+- `web` – Web UI tests
+- `mobile` – Mobile tests
+- `smoke` – Critical flow
+- `regression` – Full regression
+- `negative` – Negative scenarios
+
+### Examples
+
+Run only API tests:
+```bash
+mvn clean test -Dgroups=api
 ```bash
 mvn clean test "-DsuiteXmlFile=testng.xml"
+
 

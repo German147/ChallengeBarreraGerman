@@ -29,7 +29,4 @@ public class MobileLoginScreen {
         loginBtn.click();
     }
 
-    public void tapGoogleLoginBtn() {
-        googleLoginBtn.click();
-    }
 }

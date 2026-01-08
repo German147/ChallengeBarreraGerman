@@ -13,7 +13,7 @@ public class MobileDriverFactory {
 
     private static final Logger logger = LogManager.getLogger(MobileDriverFactory.class);
 
-    private static ThreadLocal<AndroidDriver> driver = new ThreadLocal<>();
+    private static final ThreadLocal<AndroidDriver> driver = new ThreadLocal<>();
 
     private MobileDriverFactory() {
     }

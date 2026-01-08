@@ -14,6 +14,7 @@
     <maven.compiler.source>21</maven.compiler.source>
     <maven.compiler.target>21</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <suiteXmlFile>testng.xml</suiteXmlFile>
   </properties>
 
   <dependencies>
@@ -96,22 +97,35 @@
         <artifactId>allure-maven</artifactId>
         <version>2.12.0</version>
       </plugin>
+
+      <!-- ================= SUREFIRE PLUGIN ================= -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
         <version>3.2.5</version>
+
         <configuration>
+
+          <!-- Enables dynamic TestNG XML execution -->
+          <suiteXmlFiles>
+            <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
+          </suiteXmlFiles>
+
+          <!-- Fail build on test failures -->
           <testFailureIgnore>false</testFailureIgnore>
-          <useSystemClassLoader>true</useSystemClassLoader>
+
+          <!-- Allure results location -->
           <systemPropertyVariables>
             <allure.results.directory>
               ${project.build.directory}/allure-results
             </allure.results.directory>
           </systemPropertyVariables>
+
         </configuration>
       </plugin>
 
     </plugins>
+
   </build>
 
 </project>
