@@ -102,3 +102,4 @@ reports/
 logs/
 *.log
 screenshots
+src/test/resources/config.properties

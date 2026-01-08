@@ -7,7 +7,8 @@ import org.testng.annotations.Test;
 
 public class MobileSmokeTest extends MobileBaseTest {
 
-    @Test
+    @Test(description = "Validate App is launched",
+            groups = { "mobile","smoke"})
     public void shouldLaunchTrelloAppSuccessfully() {
         logger.info("Running Mobile Smoke Test");
 

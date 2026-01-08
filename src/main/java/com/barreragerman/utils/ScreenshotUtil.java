@@ -36,7 +36,7 @@ public class ScreenshotUtil {
 
             if (driver == null) {
                 logger.warn("No driver available to take screenshot");
-                return;
+                throw new ScreenShotException("No active WebDriver or MobileDriver found");
             }
 
             File srcFile =
@@ -59,7 +59,7 @@ public class ScreenshotUtil {
 
         } catch (Exception e) {
             logger.error("Failed to capture screenshot", e);
-
+            throw new ScreenShotException("Failed to capture screenshot for test: " + testName);
         }
     }
 

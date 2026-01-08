@@ -8,8 +8,9 @@
 
     <test name="All Tests">
         <packages>
-            <package name="com.barreragerman.trello"/>
+            <package name="com.barreragerman.trello.api"/>
             <package name="com.barreragerman.trello.mobile"/>
+            <package name="com.barreragerman.trello.web"/>
         </packages>
     </test>
 
