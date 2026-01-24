@@ -23,6 +23,8 @@ public class SignInPage extends BasePage {
     private WebElement continueBtn;
     @FindBy(id = "mfa-promote-dismiss")
     private WebElement dismissTwoStepVerificationBtn;
+    @FindBy(css = ".error-message")
+    private WebElement errorMessageLabel;
 
     public void setUserName() {
         wait.until(ExpectedConditions.visibilityOf(userName))
@@ -54,5 +56,20 @@ public class SignInPage extends BasePage {
         clickContinue_LoginBtn();
         clickDismissTwoStepVerificationBtn();
         return new BoardPage();
+    }
+    public BoardPage inValidLogin(String dataProviderUsername,String dataProviderPassword){
+        wait.until(ExpectedConditions.visibilityOf(userName))
+                .sendKeys(dataProviderUsername);
+        clickContinue_LoginBtn();
+        wait.until(ExpectedConditions.visibilityOf(passwordField))
+                .sendKeys(dataProviderPassword);
+        clickContinue_LoginBtn();
+        return new BoardPage();
+    }
+    public String getErrorMessage() {
+        return errorMessageLabel.getText().trim();
+    }
+    public boolean isErrorVisible() {
+        return errorMessageLabel.isDisplayed();
     }
 }

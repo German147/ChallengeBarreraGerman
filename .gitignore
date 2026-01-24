@@ -103,3 +103,5 @@ logs/
 *.log
 screenshots
 src/test/resources/config.properties
+allure/results
+.allure/

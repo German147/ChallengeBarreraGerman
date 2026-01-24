@@ -57,7 +57,7 @@ public class ApiBoardTests {
             groups = { "api", "negative", "regression" }
     )
     public void shouldReturn404ForNonExistingBoard() {
-        String fakeBoardId = "64f1c9e8a1b2c3d4e5f67890";
+        String fakeBoardId = "64f1c9e8~a1b2c3d4e5f67890";
 
         int statusCode =
                 TrelloService.getBoardStatusCode(fakeBoardId);

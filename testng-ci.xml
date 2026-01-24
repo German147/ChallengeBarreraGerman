@@ -1,0 +1,17 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="CI Automation Suite" parallel="false">
+
+    <listeners>
+        <listener class-name="io.qameta.allure.testng.AllureTestNg"/>
+        <listener class-name="com.barreragerman.listeners.TestListener"/>
+    </listeners>
+
+    <test name="API and WEB Tests">
+        <packages>
+            <package name="com.barreragerman.trello.api"/>
+            <package name="com.barreragerman.trello.web"/>
+        </packages>
+    </test>
+
+</suite>

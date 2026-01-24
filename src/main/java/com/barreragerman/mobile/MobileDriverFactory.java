@@ -14,11 +14,19 @@ public class MobileDriverFactory {
     private static final Logger logger = LogManager.getLogger(MobileDriverFactory.class);
 
     private static final ThreadLocal<AndroidDriver> driver = new ThreadLocal<>();
-
+    //Constructor under revision
     private MobileDriverFactory() {
     }
 
     public static void initDriver() {
+        boolean runMobile =
+                Boolean.parseBoolean(System.getProperty("mobile", "false"));
+
+        if (!runMobile) {
+            logger.warn("Mobile execution disabled. Skipping driver init.");
+            return;
+        }
+
         try {
             logger.info("Initializing Android Driver");
 

@@ -12,15 +12,26 @@ public class ConfigManager {
                      ConfigManager.class.getClassLoader()
                              .getResourceAsStream("config.properties")) {
 
-            properties.load(input);
+            if (input != null) {
+                properties.load(input);
+            } else {
+                System.out.println("config.properties not found, using environment variables only");
+            }
 
         } catch (Exception e) {
             throw new RuntimeException("Could not load config.properties", e);
         }
     }
 
-    public static String get(String key_or_token) {
-        return properties.getProperty(key_or_token);
+    // 🔥 MAIN METHOD: ENV > PROPERTIES
+    public static String get(String key) {
+
+        String envValue = System.getenv(key.toUpperCase().replace(".", "_"));
+        if (envValue != null) {
+            return envValue;
+        }
+
+        return properties.getProperty(key);
     }
 
     public static String getBrowser(String browser) {
@@ -30,6 +41,6 @@ public class ConfigManager {
             return systemValue;
         }
 
-        return properties.getProperty(browser);
+        return get(browser);
     }
 }

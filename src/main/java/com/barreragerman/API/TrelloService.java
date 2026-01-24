@@ -9,20 +9,23 @@ import io.restassured.response.Response;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import static io.restassured.RestAssured.config;
 import static io.restassured.RestAssured.given;
 
 public class TrelloService {
     private static final Logger logger =
             LogManager.getLogger(TrelloService.class);
 
-    static {
-        RestAssured.baseURI = ConfigManager.get("trello.baseUrl");
-        logger.info("Base URI configured: {}", RestAssured.baseURI);
+    private static void configure() {
+        if (RestAssured.baseURI == null) {
+            RestAssured.baseURI = ConfigManager.get("trello.baseUrl");
+            logger.info("Base URI configured: {}", RestAssured.baseURI);
+        }
     }
 
     public static Board createBoard() {
-
-        String boardName = "PinAppBoard-" + System.currentTimeMillis();
+        configure();
+        String boardName = "PinAppBoardGermanAPI-" + System.currentTimeMillis();
         logger.info("Creating board with name: {}", boardName);
 
         Response response = given()
@@ -55,7 +58,7 @@ public class TrelloService {
     }
 
     public static Board getBoardById(String boardId) {
-
+        configure();
         Response response = given()
                 .queryParam("key", ConfigManager.get("trello.key"))
                 .queryParam("token", ConfigManager.get("trello.token"))
@@ -79,7 +82,7 @@ public class TrelloService {
 
 
     public static void deleteBoard(String boardId) {
-
+        configure();
         given()
                 .queryParam("key", ConfigManager.get("trello.key"))
                 .queryParam("token", ConfigManager.get("trello.token"))
@@ -105,7 +108,7 @@ public class TrelloService {
     }
 
     public static Board updateBoardName(String boardId, String newName) {
-
+    configure();
         Response rs =
                 given()
                         .queryParam("key", ConfigManager.get("trello.key"))
@@ -122,6 +125,7 @@ public class TrelloService {
     }
 
     public static int getBoardStatusCode(String boardId) {
+      configure();
         int statusCode =
                 given()
                         .queryParam("key", ConfigManager.get("trello.key"))
