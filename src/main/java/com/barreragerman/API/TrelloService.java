@@ -9,7 +9,6 @@ import io.restassured.response.Response;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import static io.restassured.RestAssured.config;
 import static io.restassured.RestAssured.given;
 
 public class TrelloService {
@@ -17,11 +16,10 @@ public class TrelloService {
             LogManager.getLogger(TrelloService.class);
 
     private static void configure() {
-        if (RestAssured.baseURI == null) {
-            RestAssured.baseURI = ConfigManager.get("trello.baseUrl");
-            logger.info("Base URI configured: {}", RestAssured.baseURI);
-        }
+        RestAssured.baseURI = ConfigManager.get("trello.baseUrl");
+        logger.info("Base URI configured: {}", RestAssured.baseURI);
     }
+
 
     public static Board createBoard() {
         configure();
