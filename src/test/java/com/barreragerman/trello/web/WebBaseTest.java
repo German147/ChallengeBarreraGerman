@@ -13,14 +13,21 @@ public abstract class WebBaseTest {
 
     protected final Logger logger = LogManager.getLogger(this.getClass());
 
-    //esta tag es para que se auto-seleccione al ser parallel al venir el llamado de un xml
     @Parameters("browser")
     @BeforeClass(alwaysRun = true)
-    public void setUp(@Optional String browser) {
+    public void setUp(@Optional("chrome") String browser) {
+
         logger.info("Initializing WebDriver");
         logger.info(">>> Browser parameter received from TestNG = {}", browser);
+
+        if (browser == null || browser.isBlank()) {
+            browser = "chrome";
+            logger.warn("Browser param was null/blank. Defaulting to CHROME.");
+        }
+
         DriverFactory.initDriver(browser);
     }
+
 
     @AfterClass(alwaysRun = true)
     public void tearDown() {

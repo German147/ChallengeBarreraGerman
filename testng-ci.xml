@@ -8,6 +8,8 @@
     </listeners>
 
     <test name="API and WEB Tests">
+        <parameter name="browser" value="chrome"/>
+
         <packages>
             <package name="com.barreragerman.trello.api"/>
             <package name="com.barreragerman.trello.web"/>

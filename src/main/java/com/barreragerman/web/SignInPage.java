@@ -8,8 +8,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class SignInPage extends BasePage {
 
-    String realUsername = ConfigManager.get("trello.username");
-    String realPassword = ConfigManager.get("trello.password");
+    String realUsername = ConfigManager.get("web.username");
+    String realPassword = ConfigManager.get("web.password");
 
     public SignInPage() {
         super();
