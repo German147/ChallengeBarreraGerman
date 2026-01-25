@@ -23,15 +23,22 @@ public class ConfigManager {
         }
     }
 
-    // 🔥 MAIN METHOD: ENV > PROPERTIES
     public static String get(String key) {
 
-        String envValue = System.getenv(key.toUpperCase().replace(".", "_"));
-        if (envValue != null) {
-            return envValue;
+        String propValue = properties.getProperty(key);
+
+        boolean isCi = "true".equalsIgnoreCase(System.getenv("CI"));
+
+        if (isCi) {
+            String envKey = key.toUpperCase().replace(".", "_");
+            String envValue = System.getenv(envKey);
+
+            if (envValue != null && !envValue.isBlank()) {
+                return envValue;
+            }
         }
 
-        return properties.getProperty(key);
+        return propValue;
     }
 
     public static String getBrowser(String browser) {
