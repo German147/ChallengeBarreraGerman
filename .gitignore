@@ -103,5 +103,8 @@ logs/
 *.log
 screenshots
 src/test/resources/config.properties
+<<<<<<< Updated upstream
 allure/results
+=======
+>>>>>>> Stashed changes
 .allure/
